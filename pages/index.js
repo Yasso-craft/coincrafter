@@ -1,8 +1,13 @@
 import { useState } from "react";
-import { Connection, PublicKey, clusterApiUrl } from "@solana/web3.js";
+import { Connection, PublicKey } from "@solana/web3.js";  // removed clusterApiUrl since we won't use it directly
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+
+// Use environment variable for the RPC URL, fallback to devnet if not set
+const rpcUrl = import.meta.env.VITE_SOLANA_RPC || "https://api.devnet.solana.com";
+const connection = new Connection(rpcUrl, "confirmed");
+
 
 export default function CoinCrafter() {
   const [wallet, setWallet] = useState(null);
